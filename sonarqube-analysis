@@ -8,14 +8,14 @@ node{
         script {
             // Use the configured Maven installation
             def mvnHome = tool 'Maven-3.6.3'
-            sh "${mvnHome}/usr/share/maven clean package"
+            sh "${mvnHome}/bin/mvn clean package"
         }
     }
 }
    stage('SonarQube Analysis') {
         def mvnHome =  tool name: 'Maven-3.6.3', type: 'maven'
         withSonarQubeEnv('sonar') { 
-          sh "${mvnHome}/usr/share/maven sonar:sonar"
+          sh "${mvnHome}/bin/mvn sonar:sonar"
         }
     }
 }
